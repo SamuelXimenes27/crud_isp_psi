@@ -1,0 +1,23 @@
+{% extends 'main/index.html' %}
+{% block title %}
+Cadastrar Ordem de Serviço
+{% endblock %}
+
+{% block content %}
+<h3>Cadastrar Ordem de Serviço</h3>
+<br>
+<div class="col-2 m-auto pt-6 pb-2 text-center">
+    <form name="formOS" id="formOS" action="{% if database %}/updateOS/{{database.id}}/{%else%}/createOS/{% endif %}"
+        method="post">
+        {% csrf_token %}
+        <div class="form-group mt-4">Cpf do Cliente {{formOS.cpf_client}}</div>
+        <div class="form-group mt-4">Data da Visita {{formOS.visit_date}}</div>
+        <div class="form-group mt-4">Horário da Visita {{formOS.visit_hour}}</div>
+        <div class="form-group mt-4">Descreva o Problema {{formOS.visit_reason}}</div>
+        <div class="form-group mt-4">Técnico {{formOS.technician_name}}</div>
+        <a href="/" class="btn btn-dark">Cancel</a>
+
+        <input type="submit" class="btn btn-primary" value="Save">
+    </form>
+</div>
+{% endblock %}

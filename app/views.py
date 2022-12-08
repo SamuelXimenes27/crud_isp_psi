@@ -1,5 +1,8 @@
+from datetime import timezone
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from app.forms import AnimalsForm, ServiceOrdersForm
+from app.formsT import CreateListForm
 from app.models import Animals, ServiceOrders
 from django.core.paginator import Paginator
 
@@ -19,18 +22,18 @@ def home(request):
     searchOS = request.GET.get('search')
     if searchOS:
         dataOS['databaseOS'] = ServiceOrders.objects.filter(
-            cpf_client__icontains=searchOS)
+            technician_name__icontains=searchOS)
 
     else:
         dataOS['databaseOS'] = ServiceOrders.objects.all()
 
-    return render(request, 'index.html', dataOS | dataClient)
+    return render(request, 'main/home.html', dataOS | dataClient)
 
 
 def dashboard(request):
     data = {}
-    data['dashboard'] = AnimalsForm()
-    return render(request, 'dashboard.html', data)
+    data['database'] = AnimalsForm()
+    return render(request, 'main/dashboard.html', data)
 
 ###########################################################################################
 # Client Form - Start
@@ -39,7 +42,7 @@ def dashboard(request):
 def form(request):
     data = {}
     data['form'] = AnimalsForm()
-    return render(request, 'form.html', data)
+    return render(request, 'main/form.html', data)
 
 
 def create(request):
@@ -53,7 +56,7 @@ def edit(request, pk):
     data = {}
     data['database'] = Animals.objects.get(pk=pk)
     data['form'] = AnimalsForm(instance=data['database'])
-    return render(request, 'form.html', data)
+    return render(request, 'main/form.html', data)
 
 
 def update(request, pk):
@@ -79,7 +82,7 @@ def delete(request, pk):
 def formOS(request):
     data = {}
     data['formOS'] = ServiceOrdersForm()
-    return render(request, 'formOS.html', data)
+    return render(request, 'main/formOS.html', data)
 
 
 def createOS(request):
@@ -93,7 +96,7 @@ def editOS(request, pk):
     data = {}
     data['database'] = ServiceOrders.objects.get(pk=pk)
     data['formOS'] = ServiceOrdersForm(instance=data['database'])
-    return render(request, 'formOS.html', data)
+    return render(request, 'main/formOS.html', data)
 
 
 def updateOS(request, pk):

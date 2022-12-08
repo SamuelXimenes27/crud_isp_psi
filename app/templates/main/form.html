@@ -1,0 +1,23 @@
+{% extends 'main/index.html' %}
+{% block title %}
+Cadastrar Cliente
+{% endblock %}
+
+{% block content %}
+<h3>Cadastrar Cliente</h3>
+<br>
+<div class="col-2 m-auto pt-6 pb-2 text-center">
+    <form name="form" id="form" action="{% if database %}/update/{{database.id}}/{%else%}/create/{% endif %}"
+        method="post">
+        {% csrf_token %}
+        <div class="form-group mt-4">Nome {{form.nome}}</div>
+        <div class="form-group mt-4">Data de Nascimento {{form.birthDate}}</div>
+        <div class="form-group mt-4">CPF {{form.cpf}}</div>
+        <div class="form-group mt-4">Endereço {{form.address}}</div>
+        <div class="form-group mt-4">Contato {{form.contact}}</div>
+        <a href="/" class="btn btn-dark">Cancel</a>
+
+        <input type="submit" class="btn btn-primary" value="Save">
+    </form>
+</div>
+{% endblock %}
