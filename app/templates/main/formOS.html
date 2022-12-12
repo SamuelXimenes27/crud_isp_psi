@@ -4,20 +4,82 @@ Cadastrar Ordem de Serviço
 {% endblock %}
 
 {% block content %}
+
+<style>
+    .form-row {
+        width: 200px;
+        margin: 20px;
+    }
+
+    .formu {
+        width: 600px;
+        height: 200px;
+        display: flex;
+        margin-left: -350px;
+    }
+
+    .inputs {
+        display: flex;
+    }
+
+    .inputs #name {
+        margin-left: -40px;
+    }
+
+    .inputs #date {
+        margin-left: -140px;
+    }
+
+    .inputs #cpf {
+        margin-left: -20px;
+    }
+
+    .inputs #address {
+        margin-left: -60px;
+    }
+
+    .inputs #contact {
+        margin-left: -50px;
+    }
+
+    .buttons {
+        margin-top: 10px;
+    }
+</style>
+
 <h3>Cadastrar Ordem de Serviço</h3>
 <br>
 <div class="col-2 m-auto pt-6 pb-2 text-center">
-    <form name="formOS" id="formOS" action="{% if database %}/updateOS/{{database.id}}/{%else%}/createOS/{% endif %}"
-        method="post">
-        {% csrf_token %}
-        <div class="form-group mt-4">Cpf do Cliente {{formOS.cpf_client}}</div>
-        <div class="form-group mt-4">Data da Visita {{formOS.visit_date}}</div>
-        <div class="form-group mt-4">Horário da Visita {{formOS.visit_hour}}</div>
-        <div class="form-group mt-4">Descreva o Problema {{formOS.visit_reason}}</div>
-        <div class="form-group mt-4">Técnico {{formOS.technician_name}}</div>
-        <a href="/" class="btn btn-dark">Cancel</a>
+    <div class="formu">
+        <form name="formOS" id="formOS"
+            action="{% if database %}/updateOS/{{database.id}}/{%else%}/createOS/{% endif %}" method="post">
+            {% csrf_token %}
+            <div class="inputs">
+                <p>Nome</p>
+                <div id="name" class="form-group mt-4">{{formOS.cpf_client}}</div>
+            </div>
+            <div class="inputs">
+                <p>Data de Nascimento</p>
+                <div id="date" class="form-group mt-4"> {{formOS.visit_date}}</div>
+            </div>
+            <div class="inputs">
+                <p>CPF</p>
+                <div id="cpf" class="form-group mt-4"> {{formOS.visit_hour}}</div>
+            </div>
+            <div class="inputs">
+                <p>Endereço</p>
+                <div id="address" class="form-group mt-4"> {{formOS.visit_reason}}</div>
+            </div>
+            <div class="inputs">
+                <p>Contato</p>
+                <div id="contact" class="form-group mt-4"> {{formOS.technician_name}}</div>
+            </div>
+            <div class="buttons">
+                <a href="/" id="cancel" class="btn btn-dark">Cancelar</a>
 
-        <input type="submit" class="btn btn-primary" value="Save">
-    </form>
+                <input type="submit" id="save" class="btn btn-primary" value="Confirmar">
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

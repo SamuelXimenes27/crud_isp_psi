@@ -2,7 +2,6 @@ from datetime import timezone
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from app.forms import AnimalsForm, ServiceOrdersForm
-from app.formsT import CreateListForm
 from app.models import Animals, ServiceOrders
 from django.core.paginator import Paginator
 
