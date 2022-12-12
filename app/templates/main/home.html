@@ -6,27 +6,31 @@ Home
 
 {% block content %}
 
+<style>
+    table thead {
+        background-color: lightblue;
+    }
+
+    .table-responsive {
+        width: 1200px;
+    }
+</style>
+
 <div class="col-8 m-auto pt-2 pb-2 text-center">
     <h1>Lista de Clientes</h1>
 </div>
 
 
 
-<div class="col-8 m-auto pt-3 pb-2 text-center">
+<div class="col-8 m-auto pt-3 pb-2 text-center" id="searchBar">
     <form method="get">
         <input type="text" id="search" name="search" class="form-control" placeholder="Digite o CPF...">
     </form>
 </div>
 
-<!-- <div class="col-10 m-auto pt-3 pb-2 text-center">
-    <a href="/formT" class="btn btn-primary btn-lg btn-block">Registrar</a>
-</div> -->
-
-
-
-<div class="col-10 m-auto pb-2 text-center">
-    <table class="table table-striped table-hover">
-        <thead class="table">
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
@@ -34,10 +38,12 @@ Home
                 <th scope="col">CPF</th>
                 <th scope="col">Endereço</th>
                 <th scope="col">Contato</th>
-                <th scope="col">Date/Time</th>
+                <th scope="col">Data</th>
+            </tr>
+        </thead>
 
-
-                {% for list in database %}
+        <tbody>
+            {% for list in database %}
             <tr>
                 <th>{{list.id}}</th>
                 <td>{{list.nome}}</td>
@@ -48,15 +54,14 @@ Home
                 <td>{{list.updateOn}}</td>
 
                 <td>
-                    <a href="/edit/{{list.id}}/" class="fas fa-edit col-1" style='font-size:17px'> </a>
+                    <a href="/edit/{{list.id}}/" class="fas fa-edit col-1 " style='font-size:17px'></a>
                     <a href="/delete/{{list.id}}/" class="fa fa-trash col-1" style='font-size:17px'></a>
                 </td>
             </tr>
             {% endfor %}
-            </tbody>
+        </tbody>
     </table>
 </div>
-
 
 
 <div class="col-8 m-auto pt-2 pb-2 text-center">
@@ -71,15 +76,11 @@ Home
     </form>
 </div>
 
-<!-- <div class="col-10 m-auto pt-3 pb-2 text-center">
-    <a href="/formOS" class="btn btn-primary btn-lg btn-block">Registrar</a>
-</div> -->
 
 
-
-<div class="col-10 m-auto pb-2 text-center">
-    <table class="table table-striped table-hover">
-        <thead class="table">
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">CPF do Cliente</th>
@@ -87,9 +88,11 @@ Home
                 <th scope="col">Horário da Visita</th>
                 <th scope="col">Descreva o Problema</th>
                 <th scope="col">Técnico</th>
+            </tr>
+        </thead>
 
-
-                {% for list in databaseOS %}
+        <tbody>
+            {% for list in databaseOS %}
             <tr>
                 <th>{{list.id}}</th>
                 <td>{{list.cpf_client}}</td>
@@ -100,11 +103,11 @@ Home
 
                 <td>
                     <a href="/editOS/{{list.id}}/" class="fas fa-edit col-1" style='font-size:17px'> </a>
-                    <a href="/delete/{{list.id}}/" class="fa fa-trash col-1" style='font-size:17px'></a>
+                    <a href="/deleteOS/{{list.id}}/" class="fa fa-trash col-1" style='font-size:17px'></a>
                 </td>
             </tr>
             {% endfor %}
-            </tbody>
+        </tbody>
     </table>
 </div>
 {% endblock %}
