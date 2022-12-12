@@ -38,6 +38,19 @@ def dashboard(request):
 # Client Form - Start
 
 
+def listClient(request):
+    dataClient = {}
+    searchClient = request.GET.get('search')
+    if searchClient:
+        dataClient['database'] = Animals.objects.filter(
+            technician_name__icontains=searchClient)
+
+    else:
+        dataClient['database'] = Animals.objects.all()
+
+        return render(request, 'main/listClient.html', dataClient)
+
+
 def form(request):
     data = {}
     data['form'] = AnimalsForm()
@@ -76,6 +89,19 @@ def delete(request, pk):
 
 ###########################################################################################
 # Service Order Form - Start
+
+
+def listOS(request):
+    dataOS = {}
+    searchOS = request.GET.get('search')
+    if searchOS:
+        dataOS['databaseOS'] = ServiceOrders.objects.filter(
+            technician_name__icontains=searchOS)
+
+    else:
+        dataOS['databaseOS'] = ServiceOrders.objects.all()
+
+        return render(request, 'main/listOS.html', dataOS)
 
 
 def formOS(request):

@@ -1,0 +1,64 @@
+{% extends 'main/index.html' %}
+{% block title %}
+Cadastrar Cliente
+{% endblock %}
+
+{% block content %}
+<style>
+    table thead {
+        background-color: lightblue;
+    }
+
+    .table-responsive {
+        width: 1200px;
+    }
+</style>
+
+<div class="col-8 m-auto pt-2 pb-2 text-center">
+    <h1>Lista de Ordem de Serviços</h1>
+</div>
+
+
+
+<div class="col-8 m-auto pt-3 pb-2 text-center">
+    <form method="get">
+        <input type="text" id="search" name="search" class="form-control" placeholder="Digite o Nome do Técnico...">
+    </form>
+</div>
+
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">CPF do Cliente</th>
+                <th scope="col">Data da Visita</th>
+                <th scope="col">Horário da Visita</th>
+                <th scope="col">Descreva o Problema</th>
+                <th scope="col">Técnico</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for list in databaseOS %}
+            <tr>
+                <th>{{list.id}}</th>
+                <td>{{list.cpf_client}}</td>
+                <td>{{list.visit_date}}</td>
+                <td>{{list.visit_hour}}</td>
+                <td>{{list.visit_reason}}</td>
+                <td>{{list.technician_name}}</td>
+
+                <td>
+                    <a href="/editOS/{{list.id}}/" class="fas fa-edit col-1" style='font-size:17px'> </a>
+                    <a href="/deleteOS/{{list.id}}/" class="fa fa-trash col-1" style='font-size:17px'></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

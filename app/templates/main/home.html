@@ -17,97 +17,58 @@ Home
 </style>
 
 <div class="col-8 m-auto pt-2 pb-2 text-center">
-    <h1>Lista de Clientes</h1>
+    <h1>Dashboard</h1>
 </div>
-
-
-
-<div class="col-8 m-auto pt-3 pb-2 text-center" id="searchBar">
-    <form method="get">
-        <input type="text" id="search" name="search" class="form-control" placeholder="Digite o CPF...">
-    </form>
-</div>
-
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Data de Nascimento</th>
-                <th scope="col">CPF</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Contato</th>
-                <th scope="col">Data</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for list in database %}
-            <tr>
-                <th>{{list.id}}</th>
-                <td>{{list.nome}}</td>
-                <td>{{list.birthDate}}</td>
-                <td>{{list.cpf}}</td>
-                <td>{{list.address}}</td>
-                <td>{{list.contact}}</td>
-                <td>{{list.updateOn}}</td>
-
-                <td>
-                    <a href="/edit/{{list.id}}/" class="fas fa-edit col-1 " style='font-size:17px'></a>
-                    <a href="/delete/{{list.id}}/" class="fa fa-trash col-1" style='font-size:17px'></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-
-<div class="col-8 m-auto pt-2 pb-2 text-center">
-    <h1>Lista de Ordem de Serviços</h1>
-</div>
-
-
 
 <div class="col-8 m-auto pt-3 pb-2 text-center">
-    <form method="get">
-        <input type="text" id="search" name="search" class="form-control" placeholder="Digite o Nome do Técnico...">
-    </form>
+    <span>Filtrar por:</span>
+    <select name="filter" id="filter" class="form-control">
+        <option value="">Escolha uma opção...</option>
+        <option value="done">Concluídas</option>
+        <option value="doing">Não Realizadas</option>
+    </select>
 </div>
-
-
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">CPF do Cliente</th>
                 <th scope="col">Data da Visita</th>
                 <th scope="col">Horário da Visita</th>
-                <th scope="col">Descreva o Problema</th>
-                <th scope="col">Técnico</th>
-            </tr>
+                <th scope="col">Endereço</th>
+                <th scope="col">Contato</th>
+                <th scope="col">status</th>
+
         </thead>
 
-        <tbody>
-            {% for list in databaseOS %}
-            <tr>
-                <th>{{list.id}}</th>
-                <td>{{list.cpf_client}}</td>
-                <td>{{list.visit_date}}</td>
-                <td>{{list.visit_hour}}</td>
-                <td>{{list.visit_reason}}</td>
-                <td>{{list.technician_name}}</td>
+        {% for list in databaseOS %}
 
-                <td>
-                    <a href="/editOS/{{list.id}}/" class="fas fa-edit col-1" style='font-size:17px'> </a>
-                    <a href="/deleteOS/{{list.id}}/" class="fa fa-trash col-1" style='font-size:17px'></a>
-                </td>
-            </tr>
-            {% endfor %}
+
+        <tr>
+            <th>{{list.id}}</th>
+            <td>{{list.visit_date}}</td>
+            <td>{{list.visit_hour}}</td>
+            <td>{{list.address}}</td>
+            <td>{{list.contact}}</td>
+            <td>{{list.status}}Não realizado</td>
+
+
+            <td>
+                {% if list.status == 'doing' %}
+                <li class="task-item">
+                    {% else %}
+                <li class="task-item done">
+                    {% endif %}
+                    <a href="/deleteOS/{{list.id}}/"><i class="fas fa-check"></i></a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
         </tbody>
     </table>
 </div>
+
 {% endblock %}
